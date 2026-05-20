@@ -17,7 +17,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-import ImagePreloader from "@/components/ImagePreloader";
+//import ImagePreloader from "@/components/ImagePreloader";
 
 export default function RootLayout({
   children,
@@ -42,8 +42,8 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className="bg-[#110E12] text-white overflow-x-hidden font-sans">
 
-        {/* PRELOAD DAS IMAGENS */}
-        <ImagePreloader />
+        {/* PRELOAD DAS IMAGENS 
+        <ImagePreloader /> */}
 
         <div className="flex flex-col min-h-screen p-6 md:p-10 relative">
 

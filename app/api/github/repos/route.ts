@@ -1,133 +1,112 @@
 export async function GET() {
   try {
-    // busca todos os repositórios
+    const headers = {
+      Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      "User-Agent": "portfolio-app",
+    };
+
+    // busca repositórios
     const reposResponse = await fetch(
       "https://api.github.com/users/TalysonRoberto/repos",
       {
-        headers: {
-          Accept: "application/vnd.github+json",
-        },
+        headers,
         next: { revalidate: 60 },
       }
     );
+
+    if (!reposResponse.ok) {
+      return Response.json(
+        { error: "Erro ao buscar repositórios do GitHub" },
+        { status: 500 }
+      );
+    }
 
     const repos = await reposResponse.json();
 
     const filteredRepos = repos.filter(
       (repo: any) =>
-        repo.name.toLowerCase() !== "talysonroberto"
+        repo.name.toLowerCase() !== "talysonroberto" &&
+        !repo.fork
     );
 
     const projects = await Promise.all(
       filteredRepos.map(async (repo: any) => {
         let image = null;
 
-        // tenta pasta Doc
-        try {
-          const docResponse = await fetch(
-            `https://api.github.com/repos/TalysonRoberto/${repo.name}/contents/Doc`,
-            {
-              headers: {
-                Accept: "application/vnd.github+json",
-              },
-              next: { revalidate: 60 },
-            }
-          );
+        // tenta DOC e doc
+        const folders = ["Doc", "doc"];
 
-          if (docResponse.ok) {
-            const docs = await docResponse.json();
+        for (const folder of folders) {
+          try {
+            const response = await fetch(
+              `https://api.github.com/repos/TalysonRoberto/${repo.name}/contents/${folder}`,
+              {
+                headers,
+                next: { revalidate: 60 },
+              }
+            );
+
+            if (!response.ok) continue;
+
+            const files = await response.json();
+
+            //console.log(repo.name, files);
 
             const firstImage =
-              docs.find(
+              files.find(
                 (file: any) =>
                   file.name.toLowerCase() === "portfolio.png"
               ) ||
-
-              docs.find(
+              files.find(
                 (file: any) =>
                   file.name.toLowerCase() === "portfolio.jpg"
               ) ||
-
-              docs.find(
+              files.find(
                 (file: any) =>
                   file.name.toLowerCase() === "portfolio.jpeg"
               ) ||
-
-              docs.find((file: any) =>
+              files.find((file: any) =>
                 file.name.match(/\.(png|jpg|jpeg|webp)$/i)
               );
 
             if (firstImage) {
               image = firstImage.download_url;
+              break;
             }
+          } catch (err) {
+            console.log(`Erro em ${repo.name}`);
           }
-        } catch {}
-
-        // tenta pasta doc minúsculo
-        if (!image) {
-          try {
-            const docResponse = await fetch(
-              `https://api.github.com/repos/TalysonRoberto/${repo.name}/contents/doc`,
-              {
-                headers: {
-                  Accept: "application/vnd.github+json",
-                },
-                next: { revalidate: 60 },
-              }
-            );
-
-            if (docResponse.ok) {
-              const docs = await docResponse.json();
-
-              const firstImage =
-                docs.find(
-                  (file: any) =>
-                    file.name.toLowerCase() === "portfolio.png"
-                ) ||
-
-                docs.find(
-                  (file: any) =>
-                    file.name.toLowerCase() === "portfolio.jpg"
-                ) ||
-
-                docs.find(
-                  (file: any) =>
-                    file.name.toLowerCase() === "portfolio.jpeg"
-                ) ||
-
-                docs.find((file: any) =>
-                  file.name.match(/\.(png|jpg|jpeg|webp)$/i)
-                );
-
-              if (firstImage) {
-                image = firstImage.download_url;
-              }
-            }
-          } catch {}
         }
 
         return {
           name: repo.name,
           github: repo.html_url,
           description: repo.description,
-          image: image,
-          updated_at: repo.updated_at,
-          isNew: [
-            "Gerenciador-de-Atividades-com-Alerta-Autom-tico",
-            "Dev-Blog-Engine"
-          ].includes(repo.name),
+          image,
+          updatedAt: repo.updated_at,
+          isNew: false,
         };
       })
     );
 
+    // ordena por atualização
     projects.sort(
       (a, b) =>
-        new Date(b.updated_at).getTime() -
-        new Date(a.updated_at).getTime()
+        new Date(b.updatedAt).getTime() -
+        new Date(a.updatedAt).getTime()
     );
 
+    // marca os 2 mais recentes
+    projects.forEach((project, index) => {
+      project.isNew = index < 2;
+    });
+
     return Response.json(projects);
+
   } catch (error) {
+    console.error(error);
+
     return Response.json(
       {
         error: "Erro ao buscar projetos",

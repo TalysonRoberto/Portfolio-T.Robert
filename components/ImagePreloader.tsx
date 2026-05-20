@@ -1,3 +1,5 @@
+// components/ImagePreloader.tsx
+
 "use client";
 
 import { useEffect } from "react";
@@ -14,6 +16,8 @@ const ImagePreloader = () => {
 
         const projetos = await response.json();
 
+        if (!Array.isArray(projetos)) return;
+
         projetos.forEach((projeto: any) => {
 
           if (!projeto.image) return;
@@ -24,7 +28,6 @@ const ImagePreloader = () => {
 
         });
 
-        // salva cache uma única vez
         sessionStorage.setItem(
           "github_projects",
           JSON.stringify(projetos)

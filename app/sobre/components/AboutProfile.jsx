@@ -11,7 +11,12 @@ const AboutProfile = () => {
           md:w-[180px] md:h-[190px] 
           overflow-hidden rounded-sm"
       >
-        <Image src="/perfil.png" alt="Perfil" fill className="object-cover" />
+        <Image
+          src="/foto_perfil.png"
+          alt="Perfil"
+          fill
+          className="object-cover"
+        />
       </div>
 
       <div className="bg-purple-700 w-full text-center text-white text-sm md:text-lg font-medium">

@@ -8,11 +8,13 @@ const jetbrains = JetBrains_Mono({
 
 const CodeCard = () => {
   return (
+    // Adicionado md:flex-1 para fazer o card esticar e ocupar o espaço restante
     <div
       className="bg-[#111318] border border-zinc-700 rounded-2xl 
       px-4 md:px-6 
       py-4 
-    w-[70vw] md:w-[clamp(500px,50vw,950px)]
+      w-[70vw] md:w-full md:flex-1
+      h-full
     "
     >
       <div className="flex gap-2 mb-3">
@@ -24,7 +26,7 @@ const CodeCard = () => {
       <pre
         className={`
         leading-5 md:leading-7
-        text-[11px] md:text-[13px] 
+        text-[11px] md:text-[16px] xl:text-[18px] 
         whitespace-pre-wrap break-words ${jetbrains.className}`}
       >
         <span className="text-purple-500">class</span>{' '}
@@ -35,12 +37,15 @@ const CodeCard = () => {
         <span className="text-yellow-500">String cargo</span> =
         <span className="text-green-400"> "Dev Fullstack"</span>;{'\n  '}
         <span className="text-yellow-500">String formacao</span> =
-        <span className="text-green-400"> "Sistemas para Internet"</span>;
-        {'\n  '}
+        <span className="text-green-400">
+          {' '}
+          "Sistemas para Internet, Desenvolvedor Full Stack"
+        </span>
+        ;{'\n  '}
         <span className="text-yellow-500">String focus</span> =
         <span className="text-green-400">
           {' '}
-          "HTML, CSS, JavaScript, React, Java, Node.js, MySQL, Git, Bootstrap"
+          "HTML, CSS, JavaScript, React, Java, Node.js, MySQL, tailwind"
         </span>
         ;{'\n'}
         {'}'}

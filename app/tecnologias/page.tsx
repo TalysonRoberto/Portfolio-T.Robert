@@ -1,12 +1,21 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+
+import { } from "framer-motion";
+
 import SectionHeader from "@/components/SectionHeader";
-import Tecnologiainfo from "@/components/Tecnologiainfo";
+import Tecnologiainfo from "./components/Tecnologiainfo";
 
 export default function Tecnologias() {
-return(
-  <div className="relative w-full h-full flex flex-col items-center overflow-hidden">
-    <Tecnologiainfo/>
-    <SectionHeader title="Tecnologias" />
-  </div>
-);}
+  return (
+    <div 
+        
+        className="relative w-full h-full flex flex-col items-center overflow-hidden">
+      <div
+        className="relative w-full h-full flex flex-col items-center overflow-hidden"
+      >
+      <Tecnologiainfo />
+       </div>
+      <SectionHeader title="Tecnologias" />
+    </div>
+  );
+}
