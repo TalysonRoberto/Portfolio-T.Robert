@@ -6,7 +6,7 @@ import { FaHtml5, FaCss3Alt, FaReact, FaJsSquare, FaFigma,} from 'react-icons/fa
 import { SiNextdotjs, SiVite, SiMysql, SiGamemaker } from 'react-icons/si';
 
 
-function calculateAge(birthDate) {
+function calculateAge(birthDate: string) {
   const birth = new Date(birthDate);
   const now = new Date();
 
