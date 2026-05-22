@@ -34,8 +34,8 @@ O portfólio possui animações suaves, integração com GitHub e foco total em 
 Página inicial com apresentação principal e identidade visual do portfólio.
 
 <p align="center">
-  <img src="Doc/home-md.png" width="60%" />
-  <img src="Doc/home.png" width="13.2%" />
+  <img src="Doc/home-md.png" width="70%" />
+  <img src="Doc/home.png" width="15%" />
 </p>
 
 ---
@@ -45,8 +45,8 @@ Página inicial com apresentação principal e identidade visual do portfólio.
 Projetos e experiências integradas diretamente com repositórios do GitHub.
 
 <p align="center">
-  <img src="Doc/experiencia-md.png" width="60%" />
-  <img src="Doc/experiencia.png" width="13.2%" />
+  <img src="Doc/experiencia-md.png" width="70%" />
+  <img src="Doc/experiencia.png" width="15%" />
 </p>
 
 ---
@@ -56,8 +56,8 @@ Projetos e experiências integradas diretamente com repositórios do GitHub.
 Área dedicada às tecnologias e ferramentas que possuo conhecimento.
 
 <p align="center">
-  <img src="Doc/tecnologias-md.png" width="60%" />
-  <img src="Doc/tecnologias.png" width="13.2%" />
+  <img src="Doc/tecnologias-md.png" width="70%" />
+  <img src="Doc/tecnologias.png" width="15%" />
 </p>
 
 ---
@@ -67,8 +67,8 @@ Projetos e experiências integradas diretamente com repositórios do GitHub.
 Seção com foto, descrição pessoal, redes sociais, WhatsApp e currículo.
 
 <p align="center">
-  <img src="Doc/sobre-md.png" width="60%" />
-  <img src="Doc/sobre.png" width="13.2%" />
+  <img src="Doc/sobre-md.png" width="70%" />
+  <img src="Doc/sobre.png" width="15%" />
 </p>
 
 ---
