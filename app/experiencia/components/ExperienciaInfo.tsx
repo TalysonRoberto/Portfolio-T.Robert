@@ -125,7 +125,7 @@ const ExperienciaInfo = () => {
   }, []);
 
   const handleScroll = () => {
-    const element = scrollRef.current;
+    const scrollRef = useRef<HTMLDivElement>(null);
 
     if (!element) return;
 

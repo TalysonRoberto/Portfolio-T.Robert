@@ -83,7 +83,7 @@ const tecnologias = [
 ];
 
 const Tecnologiainfo = () => {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const [activeStep, setActiveStep] = useState(0);
 
