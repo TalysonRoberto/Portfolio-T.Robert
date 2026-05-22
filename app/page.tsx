@@ -88,7 +88,7 @@ export default function Home() {
         <div className="relative w-full h-full max-w-[800px] z-20 md:mt-10">
           <Image
             src="/perfil.png"
-            alt="Talyson Roberto"
+            alt="Perfil"
             fill
             priority
             sizes="(max-width: 768px) 100vw, 50vw"
