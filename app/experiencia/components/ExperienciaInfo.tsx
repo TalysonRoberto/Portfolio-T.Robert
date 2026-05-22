@@ -155,68 +155,47 @@ const ExperienciaInfo = () => {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="
-          custom-scroll
+        className=" custom-scroll overflow-y-auto grid grid-cols-1 md:grid-cols-4  justify-items-center
+          gap-4 py-4
           w-[60vw] md:w-full
           max-w-6xl
           h-[75vh] md:h-[71vh]
-          overflow-y-auto
-          grid
-          grid-cols-1
-          md:grid-cols-4
-          gap-4
-          py-4
-          justify-items-center
         "
       >
-        {loading &&
-          Array.from({ length: 8 }).map(
-            (_, index) => (
-              <div
-                key={index}
-                className="
-                  w-[60vw]
-                  md:w-full
-                  max-w-[320px]
-                  md:max-w-full
-                  h-[23vh]
-                  md:h-[33vh]
-                  bg-zinc-800
-                  rounded-2xl
-                  animate-pulse
-                "
-              />
-            )
-          )}
+        {loading && ( 
+          <div className="col-span-1 md:col-span-4 flex flex-col items-center justify-center gap-8 py-12">
+            {/* Mensagem de carregamento */}
+            <div className="text-center space-y-3">
+              <div className="relative">
+                <div className="w-16 h-16 mx-auto relative">
+                  <div className="absolute inset-0 border-4 border-purple-500/20 rounded-full"></div>
+                  <div className="absolute inset-0 border-4 border-purple-500 rounded-full animate-spin border-t-transparent"></div>
+                </div>
+                <p className="text-purple-400 font-medium mt-4">
+                  Buscando projetos no GitHub...
+                </p>
+                <p className="text-zinc-500 text-sm">
+                  Estamos organizando o portfólio para você
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
-        {!loading &&
-          projetos.map((projeto, index) => (
+        {!loading && projetos.map((projeto, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40, scale: 0.96,}}
               animate={{ opacity: 1, y: 0, scale: 1, }}
               transition={{ duration: 0.8, delay: index * 0.08, ease: "easeOut", }}
-              whileHover={{ y: -5, }}
               onClick={() =>
                 setSelectedProject(projeto)
               }
-              className="
-                group
-                relative
-                w-[60vw]
-                md:w-full
-                max-w-[320px]
-                md:max-w-full
-                h-[23vh]
-                md:h-[33vh]
-                bg-[#18181B]
-                border
-                border-zinc-700
-                rounded-2xl
-                overflow-visible
-                transition-all
-                duration-300
-                hover:border-purple-500
+              className=" group relative bg-[#18181B] border border-zinc-700 rounded-2xl overflow-visible 
+                transition-all duration-800 
+                hover:border-purple-600 hover:-translate-y-2 
+                w-[60vw] md:w-full max-w-[320px] md:max-w-full
+                h-[23vh] md:h-[33vh]
               "
             >
               {projeto.isNew && (
@@ -276,7 +255,7 @@ const ExperienciaInfo = () => {
                         justify-center
                         md:text-4xl
                         text-2xl
-                        text-purple-500
+                        text-purple-600
                       "
                     >
                       <FaCode />

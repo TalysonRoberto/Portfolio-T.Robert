@@ -6,18 +6,9 @@ import "./globals.css";
 
 import Image from "next/image";
 import Link from "next/link";
-
+import BackgroundGrid from "@/components/BackgroundGrid";
 import { usePathname } from "next/navigation";
-
-import {
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
-
-//import ImagePreloader from "@/components/ImagePreloader";
+import {FaGithub,FaInstagram,FaLinkedin,FaBars,FaTimes,} from "react-icons/fa";
 
 export default function RootLayout({
   children,
@@ -32,7 +23,7 @@ export default function RootLayout({
     { name: "Home", path: "/" },
     { name: "Experiencia", path: "/experiencia" },
     { name: "Tecnologias", path: "/tecnologias" },
-    { name: "Dev", path: "/codigos" },
+    //{ name: "Dev", path: "/codigos" },
     { name: "Sobre", path: "/sobre" },
   ];
 
@@ -41,9 +32,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className="bg-[#110E12] text-white overflow-x-hidden font-sans">
-
-        {/* PRELOAD DAS IMAGENS 
-        <ImagePreloader /> */}
+        {pathname !== "/" && <BackgroundGrid />}
 
         <div className="flex flex-col min-h-screen p-6 md:p-10 relative">
 
@@ -71,7 +60,7 @@ export default function RootLayout({
 
                     <Link href={item.path}>
                       <span
-                        className={`text-lg font-medium transition-colors ${
+                        className={`text-2xl font-normal transition-colors ${
                           pathname === item.path
                             ? "text-white"
                             : "text-gray-500 hover:text-gray-300"
@@ -121,7 +110,7 @@ export default function RootLayout({
                     href={item.path}
                     className={
                       pathname === item.path
-                        ? "text-purple-500"
+                        ? "text-purple-600"
                         : "text-white"
                     }
                   >
@@ -141,7 +130,7 @@ export default function RootLayout({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithub className="w-5 h-5 md:w-6 md:h-6 hover:text-purple-500 duration-300" />
+              <FaGithub className="w-5 h-5 md:w-10 md:h-10 hover:text-purple-600 duration-300" />
             </a>
 
             <a
@@ -149,7 +138,7 @@ export default function RootLayout({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram className="w-5 h-5 md:w-6 md:h-6 hover:text-purple-500 duration-300" />
+              <FaInstagram className="w-5 h-5 md:w-10 md:h-10 hover:text-purple-600 duration-300" />
             </a>
 
             <a
@@ -157,7 +146,7 @@ export default function RootLayout({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaLinkedin className="w-5 h-5 md:w-6 md:h-6 hover:text-purple-500 duration-300" />
+              <FaLinkedin className="w-5 h-5 md:w-10 md:h-10 hover:text-purple-600 duration-300" />
             </a>
 
           </aside>
@@ -174,10 +163,10 @@ export default function RootLayout({
               <Link key={item.name} href={item.path}>
 
                 <div
-                  className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
+                  className={`h-2.5 md:h-3.5 rounded-full transition-all duration-500 cursor-pointer ${
                     pathname === item.path
-                      ? "w-10 bg-purple-600 shadow-[0_0_5px_#9333ea]"
-                      : "w-5 bg-gray-800"
+                      ? "w-10 md:w-15 bg-purple-600 shadow-[0_0_5px_#9333ea]"
+                      : "w-5 md:w-8 bg-gray-800"
                   }`}
                 />
 

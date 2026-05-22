@@ -1,6 +1,9 @@
 'use client';
 
-import { FaArrowDown, FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa';
+import { IoDocumentTextOutline } from 'react-icons/io5';
+
+import Link from 'next/link';
 
 const ActionButtons = () => {
   const whatsappMessage =
@@ -37,16 +40,11 @@ const ActionButtons = () => {
         <span>WhatsApp</span>
       </a>
 
-      {/* CURRÍCULO */}
-      <a
-        href="/Curriculo Talyson Roberto.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={buttonStyle}
-      >
-        <FaArrowDown className="text-sm md:text-base" />
+      {/* CURRÍCULO  href="/Curriculo Talyson Roberto.pdf" */}
+      <Link href="/curriculo" rel="noopener noreferrer" className={buttonStyle}>
+        <IoDocumentTextOutline className="text-sm md:text-base" />
         <span>Ver Currículo</span>
-      </a>
+      </Link>
     </div>
   );
 };

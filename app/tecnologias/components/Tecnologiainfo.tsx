@@ -23,71 +23,61 @@ import {
 const tecnologias = [
   {
     nome: "React",
-    descricao:
-      "Desenvolvimento de interfaces modernas, reutilizáveis e altamente dinâmicas utilizando componentização.",
+    descricao: "Desenvolvimento de interfaces modernas, reutilizáveis e altamente dinâmicas utilizando componentização.",
     icon: <FaReact />,
   },
 
   {
     nome: "Next.js",
-    descricao:
-      "Criação de aplicações web performáticas com renderização otimizada, rotas dinâmicas e SEO avançado.",
+    descricao: "Criação de aplicações web performáticas com renderização otimizada, rotas dinâmicas e SEO avançado.",
     icon: <SiNextdotjs />,
   },
 
   {
     nome: "JavaScript",
-    descricao:
-      "Construção de aplicações interativas e funcionais com lógica moderna para web e sistemas.",
+    descricao: "Construção de aplicações interativas e funcionais com lógica moderna para web e sistemas.",
     icon: <FaJsSquare />,
   },
 
   {
     nome: "Git",
-    descricao:
-      "Controle de versão, gerenciamento de código e colaboração em projetos utilizando Git e GitHub.",
+    descricao: "Controle de versão, gerenciamento de código e colaboração em projetos utilizando Git e GitHub.",
     icon: <FaGitAlt />,
   },
 
   {
     nome: "Figma",
-    descricao:
-      "Criação de interfaces, protótipos e experiências visuais focadas em UI/UX moderno.",
+    descricao: "Criação de interfaces, protótipos e experiências visuais focadas em UI/UX moderno.",
     icon: <FaFigma />,
   },
 
   {
     nome: "Vite",
-    descricao:
-      "Ferramenta moderna de build focada em velocidade, desenvolvimento otimizado e experiência fluida.",
+    descricao: "Ferramenta moderna de build focada em velocidade, desenvolvimento otimizado e experiência fluida.",
     icon: <SiVite />,
   },
 
   {
     nome: "MySQL",
-    descricao:
-      "Gerenciamento de bancos de dados relacionais com foco em performance, organização e persistência de dados.",
+    descricao: "Gerenciamento de bancos de dados relacionais com foco em performance, organização e persistência de dados.",
     icon: <SiMysql />,
   },
 
   {
     nome: "GameMaker",
-    descricao:
-      "Desenvolvimento de jogos 2D com sistemas interativos, lógica de gameplay e prototipação rápida.",
+    descricao: "Desenvolvimento de jogos 2D com sistemas interativos, lógica de gameplay e prototipação rápida.",
     icon: <SiGamemaker />,
   },
 
   {
     nome: "HTML5",
-    descricao:
-      "Estruturação semântica de páginas web modernas com foco em acessibilidade e organização.",
+    descricao: "Estruturação semântica de páginas web modernas com foco em acessibilidade e organização.",
     icon: <FaHtml5 />,
   },
 
   {
     nome: "CSS3",
-    descricao:
-      "Estilização responsiva com animações, efeitos visuais e layouts modernos adaptáveis.",
+    descricao: "Estilização responsiva com animações, efeitos visuais e layouts modernos adaptáveis.",
     icon: <FaCss3Alt />,
   },
 ];
@@ -154,8 +144,8 @@ const Tecnologiainfo = () => {
             key={index}
             initial={{ opacity: 0, y: 40, }}
             animate={{ opacity: 1, y: 0,}}
-            transition={{ duration: 0.8, delay: index * 0.08, ease: "easeOut",}}
-
+            transition={{ duration: 0.8, delay: index * 0.08, ease: "easeOut", }}
+ 
             className="
               relative
               flex
@@ -167,7 +157,7 @@ const Tecnologiainfo = () => {
               overflow-hidden
               group
               transition-all
-              duration-300
+              duration-500
               hover:border-white
               hover:-translate-y-1
             "
@@ -192,7 +182,7 @@ const Tecnologiainfo = () => {
                 duration-300
                 group-hover:scale-105
                 group-hover:bg-white
-                group-hover:text-purple-500
+                group-hover:text-purple-600
               "
             >
               {tech.icon}

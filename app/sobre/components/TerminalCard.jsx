@@ -49,7 +49,7 @@ const TerminalCard = () => {
         </p>
 
         <div className="mt-1 text-center text-sm text-zinc-500">
-          T.Robert © 2026
+          T.Robert © {new Date().getFullYear()}
         </div>
       </div>
     </div>

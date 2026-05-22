@@ -36,7 +36,7 @@ export default function Home() {
           className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tighter text-white my-10 md:my-8"
         >
           Desenvolvedor <br />
-          <span className="text-gray-300">Full Stack &</span> <br />
+          <span className="text-gray-300">Full Stack <span className="text-purple-600">&</span></span> <br />
           <span className="text-gray-300">UX/UI Designer</span>
         </motion.h2>
 
@@ -62,9 +62,9 @@ export default function Home() {
               px-10
               py-3.5
               border
-              border-white
+              border-purple-600
               rounded-full
-              text-white
+              text-gray-200
               hover:bg-white
               hover:text-black
               transition-all

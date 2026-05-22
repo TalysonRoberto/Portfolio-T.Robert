@@ -142,7 +142,7 @@ const ProjectModal = ({
                       items-center
                       justify-center
                       text-5xl
-                      text-purple-500
+                      text-purple-600
                     "
                   >
                     <FaCode />

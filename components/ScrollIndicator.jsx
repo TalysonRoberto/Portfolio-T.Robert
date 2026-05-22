@@ -40,7 +40,7 @@ const ScrollIndicator = ({
               duration-300
               ${
                 activeStep === step
-                  ? 'text-purple-500 scale-110'
+                  ? 'text-purple-600 scale-110'
                   : 'text-zinc-700'
               }
             `}

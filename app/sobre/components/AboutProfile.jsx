@@ -7,9 +7,9 @@ const AboutProfile = () => {
     <div className="flex flex-col items-center">
       <div
         className="relative 
-          w-[140px] h-[150px] 
-          md:w-[180px] md:h-[190px] 
-          overflow-hidden rounded-sm"
+          w-[250px] h-[230px] 
+          md:w-[180px] md:h-[200px] 
+          overflow-hidden rounded-t-xl"
       >
         <Image
           src="/foto_perfil.png"
@@ -19,7 +19,7 @@ const AboutProfile = () => {
         />
       </div>
 
-      <div className="bg-purple-700 w-full text-center text-white text-sm md:text-lg font-medium">
+      <div className="bg-purple-600 w-full text-center text-white text-[18px] md:text-lg font-medium rounded-b-xl">
         Talyson Roberto
       </div>
     </div>
