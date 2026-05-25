@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import perfilImage from "@/public/perfil.png";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -87,14 +88,13 @@ export default function Home() {
       >
         <div className="relative w-full h-full max-w-[800px] z-20 md:mt-10">
           <Image
-            src="/perfil.png"
+            src={perfilImage}
             alt="Perfil"
             fill
             priority
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-contain grayscale"
           />
-
           <div className="absolute inset-0 bg-gradient-to-b from-[#110E12]/80 via-transparent to-[#110E12]/90 z-30 opacity-90"></div>
 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,#110E12_85%)] z-40 opacity-70"></div>
