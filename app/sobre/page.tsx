@@ -20,7 +20,7 @@ export default function Sobre() {
       className="
         relative
         w-full
-        min-h-[75vh]
+        min-h-[75dvh]
         mb-20
         md:mb-0
         flex
@@ -36,7 +36,7 @@ export default function Sobre() {
         py-6
       "
     >
-      <div className="flex flex-col gap-4 w-full h-[70vh] md:h-full max-w-5xl xl:max-w-6xl 2xl:max-w-7xl rounded-2xl">
+      <div className="flex flex-col gap-4 w-full h-[70dvh] md:h-full max-w-5xl xl:max-w-6xl 2xl:max-w-7xl rounded-2xl">
 
         {/* TOPO */}
         <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6 md:gap-8">
