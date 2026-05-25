@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-
 import ClientLayout from "@/components/ClientLayout";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portfolio-t-robert.vercel.app"),
+
   title: "T.Robert | Desenvolvedor Full Stack",
 
   description:
@@ -17,11 +18,19 @@ export const metadata: Metadata = {
     "UI UX",
     "Portfólio",
     "Programador",
+    "Frontend",
+    "Backend",
+    "Desenvolvedor Web",
   ],
 
-  authors: [{ name: "T.Robert" }],
+  authors: [{ name: "Talyson Robert" }],
 
   creator: "T.Robert",
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 
   openGraph: {
     title: "T.Robert | Desenvolvedor Full Stack",
@@ -38,12 +47,21 @@ export const metadata: Metadata = {
         url: "/banner.png",
         width: 1200,
         height: 630,
+        alt: "Portfólio T.Robert",
       },
     ],
 
     locale: "pt_BR",
 
     type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "T.Robert | Desenvolvedor Full Stack",
+    description:
+      "Portfólio moderno com projetos, experiências e tecnologias.",
+    images: ["/banner.png"],
   },
 
   icons: {
