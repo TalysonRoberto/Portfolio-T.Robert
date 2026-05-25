@@ -79,7 +79,7 @@ export default function CurriculoPage() {
           <div className="rounded-3xl border border-zinc-800 bg-black/40 overflow-hidden">
             <div className="relative w-full h-[250px]">
               <Image
-                src="/foto_perfil.png"
+                src="/perfil_2.jpeg"
                 alt="Perfil"
                 fill
                 className="object-cover"
