@@ -6,6 +6,10 @@ import ClientLayout from "@/components/ClientLayout";
 export const metadata: Metadata = {
   metadataBase: new URL("https://portfolio-t-robert.vercel.app"),
 
+  verification: {
+    google: "ztnMx2Ti1IwQ3PAQnBMBVGZ0YYqcf1xlSSIqqPeZWJ8",
+  },
+
   title: "T.Robert | Desenvolvedor Full Stack",
 
   description:
