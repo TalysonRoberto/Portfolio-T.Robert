@@ -66,7 +66,7 @@ export default function CurriculoPage() {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}
-      className=" relative w-[80vw] md:w-full h-[80dvh] md:h-[80vh] flex justify-center overflow-hidden p-4 ">
+      className=" relative w-[80vw] md:w-full h-[85dvh] md:h-[80vh] flex justify-center overflow-hidden p-4 ">
       <div className=" max-w-7xl mx-auto h-[75dvh] md:h-[70vh] w-full space-y-4 overflow-y-auto custom-scroll p-2">
         {/* TOPO - FOTO + SOBRE */}
         <motion.section

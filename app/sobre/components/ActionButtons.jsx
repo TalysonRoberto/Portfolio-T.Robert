@@ -7,14 +7,14 @@ import Link from 'next/link';
 
 const ActionButtons = () => {
   const whatsappMessage =
-    'Olá! Vi seu portfólio e gostaria de conversar sobre uma oportunidade. Seu trabalho me chamou atenção. Você estaria disponível para um bate-papo?';
+    'Olá! Vi seu portfólio e gostaria de conversar sobre uma projeto. Você estaria disponível para um bate-papo?';
 
   const whatsappLink = `https://wa.me/5585986741486?text=${encodeURIComponent(
     whatsappMessage,
   )}`;
 
   const buttonStyle = `
-    flex items-center justify-center gap-3
+    flex items-center justify-center gap-2
     px-4 py-3 md:px-8 md:py-4
     rounded-full
     border border-white
@@ -28,7 +28,7 @@ const ActionButtons = () => {
   `;
 
   return (
-    <div className="flex flex-row md:flex-col gap-4 mb-2">
+    <div className="flex flex-row md:flex-col gap-2 mb-2">
       {/* WHATSAPP */}
       <a
         href={whatsappLink}
@@ -43,7 +43,7 @@ const ActionButtons = () => {
       {/* CURRÍCULO  href="/Curriculo Talyson Roberto.pdf" */}
       <Link href="/curriculo" rel="noopener noreferrer" className={buttonStyle}>
         <IoDocumentTextOutline className="text-sm md:text-base" />
-        <span>Ver Currículo</span>
+        <span>Currículo Virtual</span>
       </Link>
     </div>
   );
