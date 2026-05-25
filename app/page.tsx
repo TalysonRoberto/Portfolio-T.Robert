@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import perfilImage from "@/public/perfil.png";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -88,7 +87,7 @@ export default function Home() {
       >
         <div className="relative w-full h-full max-w-[800px] z-20 md:mt-10">
           <Image
-            src={perfilImage}
+            src="/perfil-temp.png"
             alt="Perfil"
             fill
             priority
