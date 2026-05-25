@@ -112,7 +112,7 @@ const Tecnologiainfo = () => {
   };
 
   return (
-    <div className="relative w-full h-[80vh] md:h-[75vh] flex justify-center px-4 overflow-hidden">
+    <div className="relative w-full h-[85vh] md:h-[75vh] flex justify-center px-4 overflow-hidden">
 
       <ScrollIndicator
         activeStep={activeStep}

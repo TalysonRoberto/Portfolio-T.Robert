@@ -145,7 +145,7 @@ const ExperienciaInfo = () => {
   };
 
   return (
-    <div className="relative w-full h-[80vh] md:h-[80vh] flex justify-center overflow-hidden">
+    <div className="relative w-full h-[85vh] md:h-[80vh] flex justify-center overflow-hidden">
       <ScrollIndicator
         activeStep={activeStep}
         totalSteps={Math.max(totalRows, 1)}
