@@ -12,7 +12,7 @@ const AboutProfile = () => {
           overflow-hidden rounded-t-xl"
       >
         <Image
-          src="/foto_perfil.png"
+          src="/perfil_2.jpeg"
           alt="Perfil"
           fill
           className="object-cover"

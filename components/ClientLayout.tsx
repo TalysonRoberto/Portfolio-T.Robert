@@ -33,7 +33,7 @@ export default function RootLayout({
     <>
         {pathname !== "/" && <BackgroundGrid />}
 
-        <div className="flex flex-col min-h-screen p-6 md:p-10 relative">
+        <div className="flex flex-col min-h-[100dvh] p-6 md:p-10 relative">
 
           {/* HEADER */}
           <header className="flex justify-between items-center z-[100] relative">
