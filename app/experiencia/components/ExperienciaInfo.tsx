@@ -16,6 +16,8 @@ interface Projeto {
   technologies: string[];
   createdAt: string;
   isNew: boolean;
+  pageProj: string | null;
+  linguagen: string | null;
 }
 
 const CACHE_KEY = "github_projects_cache";
