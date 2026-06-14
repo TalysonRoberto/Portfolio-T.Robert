@@ -1,20 +1,14 @@
 export async function GET() {
   try {
-    // 1. CORREÇÃO: O formato correto para a API do GitHub é "token", não "Bearer"
-    const token = process.env.GITHUB_TOKEN;
-    
-    const headers: HeadersInit = {
+    const headers = {
       Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       "User-Agent": "portfolio-app",
     };
 
-    if (token) {
-      headers["Authorization"] = `token ${token}`;
-    }
-
-    // Busca repositórios
+    // busca repositórios
     const reposResponse = await fetch(
-      "https://api.github.com/users/TalysonRoberto/repos?per_page=100", // Garante que traz todos
+      "https://api.github.com/users/TalysonRoberto/repos",
       {
         headers,
         next: { revalidate: 60 },
@@ -22,81 +16,90 @@ export async function GET() {
     );
 
     if (!reposResponse.ok) {
-      const errorText = await reposResponse.text();
-      console.error("Erro do GitHub:", errorText);
       return Response.json(
-        { error: "Erro ao buscar repositórios do GitHub ou limite atingido." },
+        { error: "Erro ao buscar repositórios do GitHub" },
         { status: 500 }
       );
     }
 
     const repos = await reposResponse.json();
 
-    if (!Array.isArray(repos)) {
-      return Response.json([], { status: 200 });
-    }
-
     const filteredRepos = repos.filter(
       (repo: any) =>
-        repo.name.toLowerCase() !== "talysonroberto" && !repo.fork
+        repo.name.toLowerCase() !== "talysonroberto" &&
+        !repo.fork
     );
 
-    // 2. EVITAR BLOQUEIO: Executar sequencialmente ou tratar falhas individuais
-    const projects = [];
+    const projects = await Promise.all(
+      filteredRepos.map(async (repo: any) => {
+        let image = null;
 
-    for (const repo of filteredRepos) {
-      let image = null;
-      const folders = ["Doc", "doc"];
+        // tenta DOC e doc
+        const folders = ["Doc", "doc"];
 
-      for (const folder of folders) {
-        try {
-          const response = await fetch(
-            `https://api.github.com/repos/TalysonRoberto/${repo.name}/contents/${folder}`,
-            {
-              headers,
-              next: { revalidate: 60 },
+        for (const folder of folders) {
+          try {
+            const response = await fetch(
+              `https://api.github.com/repos/TalysonRoberto/${repo.name}/contents/${folder}`,
+              {
+                headers,
+                next: { revalidate: 60 },
+              }
+            );
+
+            if (!response.ok) continue;
+
+            const files = await response.json();
+
+            //console.log(repo.name, files);
+
+            const firstImage =
+              files.find(
+                (file: any) =>
+                  file.name.toLowerCase() === "portfolio.png"
+              ) ||
+              files.find(
+                (file: any) =>
+                  file.name.toLowerCase() === "portfolio.jpg"
+              ) ||
+              files.find(
+                (file: any) =>
+                  file.name.toLowerCase() === "portfolio.jpeg"
+              ) ||
+              files.find((file: any) =>
+                file.name.match(/\.(png|jpg|jpeg|webp)$/i)
+              );
+
+            if (firstImage) {
+              image = firstImage.download_url;
+              break;
             }
-          );
-
-          // Se der 403 (Rate Limit) ou 404 (Não achou a pasta), pula para não quebrar
-          if (!response.ok) continue;
-
-          const files = await response.json();
-          if (!Array.isArray(files)) continue;
-
-          const firstImage =
-            files.find((file: any) => file.name.toLowerCase() === "portfolio.png") ||
-            files.find((file: any) => file.name.toLowerCase() === "portfolio.jpg") ||
-            files.find((file: any) => file.name.toLowerCase() === "portfolio.jpeg") ||
-            files.find((file: any) => file.name.match(/\.(png|jpg|jpeg|webp)$/i));
-
-          if (firstImage) {
-            image = firstImage.download_url;
-            break; // Achou a imagem, não precisa testar a outra pasta ("doc")
+          } catch (err) {
+            console.log(`Erro em ${repo.name}`);
           }
-        } catch (err) {
-          console.error(`Erro ao buscar pasta ${folder} em ${repo.name}`);
         }
-      }
 
-      projects.push({
-        name: repo.name,
-        github: repo.html_url,
-        description: repo.description,
-        image,
-        createdAt: repo.created_at,
-        isNew: false,
-        pageProj: repo.homepage,
-        linguagen: repo.language,
-      });
-    }
-
-    // Ordena por atualização
-    projects.sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        return {
+          name: repo.name,
+          github: repo.html_url,
+          description: repo.description,
+          image,
+          createdAt: repo.created_at,
+          isNew: false,
+          pageProj: repo.homepage,
+          linguagen: repo.language,
+        };
+      })
     );
 
-    // Marca os 2 mais recentes
+    // ordena por atualização
+    projects.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    );
+
+    // marca os 2 mais recentes
     projects.forEach((project, index) => {
       project.isNew = index < 2;
     });
@@ -104,9 +107,12 @@ export async function GET() {
     return Response.json(projects);
 
   } catch (error) {
-    console.error("Erro crítico na API de projetos:", error);
+    console.error(error);
+
     return Response.json(
-      { error: "Erro interno ao processar projetos" },
+      {
+        error: "Erro ao buscar projetos",
+      },
       { status: 500 }
     );
   }
