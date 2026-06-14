@@ -84,8 +84,10 @@ export async function GET() {
           github: repo.html_url,
           description: repo.description,
           image,
-          updatedAt: repo.updated_at,
+          createdAt: repo.created_at,
           isNew: false,
+          pageProj: repo.homepage,
+          linguagen: repo.language,
         };
       })
     );
@@ -93,8 +95,8 @@ export async function GET() {
     // ordena por atualização
     projects.sort(
       (a, b) =>
-        new Date(b.updatedAt).getTime() -
-        new Date(a.updatedAt).getTime()
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
     );
 
     // marca os 2 mais recentes

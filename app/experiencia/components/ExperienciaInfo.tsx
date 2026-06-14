@@ -14,7 +14,7 @@ interface Projeto {
   image: string | null;
   github: string;
   technologies: string[];
-  updatedAt: string;
+  createdAt: string;
   isNew: boolean;
 }
 
@@ -104,8 +104,8 @@ const ExperienciaInfo = () => {
 
         const ordenados = data.sort(
           (a: Projeto, b: Projeto) =>
-            new Date(b.updatedAt).getTime() -
-            new Date(a.updatedAt).getTime()
+            new Date(b.createdAt).getTime() -
+            new Date(a.createdAt).getTime()
         );
 
         setCachedProjetos(ordenados);
@@ -143,6 +143,8 @@ const ExperienciaInfo = () => {
 
     setActiveStep(currentRow);
   };
+
+  console.log(projetos)
 
   return (
     <div className="relative w-full h-[80dvh] md:h-[80vh] flex justify-center overflow-hidden">

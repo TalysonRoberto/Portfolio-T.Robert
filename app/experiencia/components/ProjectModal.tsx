@@ -1,12 +1,7 @@
 "use client";
 
 import Image from "next/image";
-
-import {
-  motion,
-  AnimatePresence,
-} from "framer-motion";
-
+import {motion,AnimatePresence} from "framer-motion";
 import { FaCode } from "react-icons/fa";
 
 interface Projeto {
@@ -15,7 +10,9 @@ interface Projeto {
   image: string | null;
   github: string;
   technologies: string[];
-  updatedAt: string;
+  createdAt: string;
+  pageProj: string | null;
+  linguagen: string | null;
 }
 
 interface Props {
@@ -23,10 +20,37 @@ interface Props {
   onClose: () => void;
 }
 
+// 1. Dicionário de cores mapeando a tecnologia para classes específicas do Tailwind
+const CORES_TECNOLOGIAS: Record<string, { bg: string; text: string; border: string }> = {
+  typescript: { bg: "bg-blue-500/20", text: "text-blue-400", border: "border-blue-500/30" },
+  javascript: { bg: "bg-yellow-500/20", text: "text-yellow-400", border: "border-yellow-500/30" },
+  react: { bg: "bg-cyan-500/20", text: "text-cyan-400", border: "border-cyan-500/30" },
+  nextjs: { bg: "bg-white/10", text: "text-white", border: "border-white/20" },
+  node: { bg: "bg-green-500/20", text: "text-green-400", border: "border-green-500/30" },
+  python: { bg: "bg-blue-600/20", text: "text-yellow-500", border: "border-blue-500/30" },
+  tailwind: { bg: "bg-sky-500/20", text: "text-sky-400", border: "border-sky-500/30" },
+  html: { bg: "bg-orange-500/20", text: "text-orange-400", border: "border-orange-500/30" },
+  css: { bg: "bg-blue-500/20", text: "text-blue-400", border: "border-blue-500/30" }
+  // Adicione quantas tecnologias precisar aqui...
+};
+
+// Função auxiliar para buscar a cor ou retornar um padrão (Roxo) caso não exista no mapa
+const obterCorTecnologia = (tech: string | null) => {
+  if (!tech) return { bg: "bg-purple-600/90", text: "text-white", border: "border-purple-400/30" };
+  
+  const techLower = tech.toLowerCase().trim();
+  return CORES_TECNOLOGIAS[techLower] || { 
+    bg: "bg-purple-600/90", 
+    text: "text-white", 
+    border: "border-purple-400/30" 
+  };
+};
+
 const ProjectModal = ({
   projeto,
   onClose,
 }: Props) => {
+  const coresBadge = obterCorTecnologia(projeto?.linguagen || null);
   return (
     <AnimatePresence>
       {projeto && (
@@ -106,7 +130,33 @@ const ProjectModal = ({
               ✕
             </button>
 
-            <div className="relative w-full h-[200px] md:h-[250px] bg-zinc-900 overflow-hidden">
+           <div className="relative w-full h-[200px] md:h-[250px] bg-zinc-900 overflow-hidden">
+
+              {/* BADGE: Canto superior esquerdo */}
+              {projeto.linguagen && (
+                <div className={`
+                  absolute 
+                  bottom-4 
+                  right-4 
+                  z-20 
+                  px-2
+                  py-1
+                  rounded-full
+                  backdrop-blur-sm 
+                  text-xs 
+                  font-bold 
+                  uppercase 
+                  tracking-wider
+                  border
+                  shadow-lg
+                  ${coresBadge.bg}
+                  ${coresBadge.text}
+                  ${coresBadge.border}
+                `}>
+                  {projeto.linguagen}
+                </div>
+              )}
+
               {projeto.image ? (
                 <Image
                   src={projeto.image}
@@ -128,27 +178,28 @@ const ProjectModal = ({
                     bg-gradient-to-br
                     from-[#1F1F23]
                     to-[#111318]
+                    md:mt-0 mt-[-20px]
                   "
                 >
                   <div
                     className="
-                      w-24
-                      h-24
-                      rounded-3xl
+                      w-15
+                      h-15
+                      rounded-xl
                       bg-zinc-800
                       border
                       border-zinc-700
                       flex
                       items-center
                       justify-center
-                      text-5xl
+                      text-[30px]
                       text-purple-600
                     "
                   >
                     <FaCode />
                   </div>
 
-                  <div className="text-center px-4">
+                  <div className="text-center px-4 md:mt-0 mt-[-20px]">
                     <p className="text-white text-lg font-semibold">
                       Projeto sem preview
                     </p>
@@ -163,13 +214,13 @@ const ProjectModal = ({
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#18181B] via-transparent to-transparent" />
             </div>
 
-            <div className="p-6 md:p-8 flex flex-col gap-4">
+            <div className="p-6 md:p-8 flex flex-col md:gap-4 gap-2 md:mt-0 mt-[-20px]">
               <div>
                 <h2 className="text-xl md:text-3xl font-bold text-white mb-3">
                   {projeto.name}
                 </h2>
 
-                <p className="text-zinc-400 leading-relaxed text-sm md:text-base">
+                <p className="text-zinc-400 leading-relaxed text-sm md:text-base md:line-clamp-none line-clamp-4">
                   {projeto.description ||
                     "Projeto sem descrição."}
                 </p>
@@ -207,6 +258,8 @@ const ProjectModal = ({
                   }
                   className="
                     inline-flex
+                    align-center
+                    justify-center
                     px-4
                     py-2
                     border
@@ -218,12 +271,44 @@ const ProjectModal = ({
                     transition-all
                     duration-300
                     font-semibold
-                    text-lg
+                    text-ls
                   "
                 >
                   Acessar Repositório
                 </a>
+
+                {/* O botão só aparece se pageProj não for nulo/vazio */}
+                {projeto.pageProj && (
+                  <a
+                    href={projeto.pageProj}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseDown={(e) =>
+                      e.stopPropagation()
+                    }
+                    className="
+                      inline-flex
+                      align-center
+                      justify-center
+                      px-4
+                      py-2
+                      border
+                      border-white
+                      rounded-full
+                      text-white
+                      hover:bg-white
+                      hover:text-black
+                      transition-all
+                      duration-300
+                      font-semibold
+                      text-ls
+                    "
+                  >
+                    Abrir projeto
+                  </a>
+                )}
               </div>
+              
             </div>
           </motion.div>
         </motion.div>
